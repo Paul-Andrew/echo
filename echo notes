@@ -1,0 +1,71 @@
+echoserver
+
+BIND LOOP
+
+create listening, nonblocking sockets
+
+END BIND LOOP
+
+pass sockets to epoll
+
+SERVER LOOP
+
+    get responses from epoll
+
+    reply to responses
+
+END SERVER LOOP
+
+Free() structs
+
+EXIT
+
+
+
+
+functions:
+
+main()
+    int errors, fd, 
+    struct epoll_event event;
+    struct epoll_event *events;
+    
+    create_epoll
+
+    foreach(proto)    
+        createsocket(proto *addrinfo *fd)
+
+
+    serverloop()
+    
+    free(addrinfo)
+    close fd
+
+createsocket(proto events *fd)
+    struct addrinfo
+    memset addrinfo
+    addrinfo.ai_family = af_unspec
+    if tcp
+        addrinfo.ai_socktype = SOCKSTREAM
+    else
+        addrinfo.ai_socktype = SOCK_DGRAM
+    getaddrinfo
+    socket()
+    setsockopt()
+    fcntl() non-block
+    if not udp
+        bind()
+    listen()
+    
+
+
+serverloop(events)
+    char buffer[]
+    epollwait
+    
+    
+    
+    free(epollevents)
+
+
+https://banu.com/blog/2/how-to-use-epoll-a-complete-example-in-c/
